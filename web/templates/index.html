@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="{{ base_url }}static/css/main.css"/>
+
+</head>
+<body>
+
+<div class="row">
+  <div class="logo">
+    <a href="/"><img src=" {{ logo }} "></a>
+  </div>
+  <div class="header">
+    <a href="/"><img height=77px src="static/images/OPDT.png"></a>
+  </div>
+</div>
+<div class="row">
+  <div class="column" >
+      <a href="/" title="Application Home"><b>  Home </b></a><br>
+      <br>
+    {% for category in categories %}
+      <button type="button" class="category">&#9654; {{ category }} </button>
+      <div class="apps">
+        <table>
+        {% for app in applist %}
+          {% if app['category'] == category %}
+            <tr><td><span title="{{ app['summary'] }}">{{ app['name'] }}</span></td>
+                <td>&nbsp;</td>
+      		<td> <a href="{{ app['link'] }}" onclick="return popitup(this)" title="Open the tool site in a new window"><button type="button">Launch</button></a> </td> 
+      		<td> <a href="{{ base_url }}info/{{ app['info'] }}" target="info" title="Information about the tool function"><button type="button" >Info</button> </td>
+      		<td> <a href="https://duckduckgo.com/{{ app['search'] }}" onclick="return popitup(this)" title="search DDG for similar tools"><button type="button" >Search</button> </td>
+		</tr>
+          {% endif %}
+        {% endfor %}
+        </table>
+	</div>
+     {% endfor %}
+      <button type="button" class="category">&#9654; All  </button>
+      <div class="apps">
+        <table>
+        {% for app in applist %}
+            <tr><td><span title="{{ app['summary'] }}">{{ app['name'] }}</span></td>
+                <td>&nbsp;</td>
+                <td>b</td>
+                <td>b</td>
+                <td>b</td></tr>
+        {% endfor %}
+        </table>
+        </div>
+
+  </div>
+  <div class="content" >
+    <iframe name="info" frameborder='0' noresize='noresize' style='position: absolute; background: transparent; width: 100%; height:100%;' src="{{ base_url }}home" frameborder="0"></iframe>
+
+  </div>
+</div>
+
+    <button id="download-btn">Download Page</button>
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
+    <script>
+        document.getElementById('download-btn').addEventListener('click', function () {
+            var docContent = document.documentElement.outerHTML;
+            var blob = new Blob([docContent], { type: 'text/html' });
+            saveAs(blob, 'OtherPeoplesDevTools.html');
+        });
+    </script>
+
+<script>
+var coll = document.getElementsByClassName("category");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+
+
+function popitup(link) {
+  var w = window.open(link.href,
+    link.target || "_blank",
+ 'menubar=no,toolbar=no,location=no,directories=no,status=no,scrollbars=no,resizable=no,dependent,width=1200,height=620,left=0,top=0');
+  return w ? false : true; // allow the link to work if popup is blocked
+}
+
+
+function openFile (textToEncode, contentType, newWindow) {
+    var encodedText = window.btoa(textToEncode);
+    var dataURL = 'data:' + contentType + ';base64,' + encodedText;
+    if (newWindow) { // Not useful for application/octet-stream type
+        window.open(dataURL); // To open in a new tab/window
+    }
+    else {
+        window.location = dataURL; // To change the current page
+    }
+}
+
+
+</script>
+
+</body>
+</html>
+
