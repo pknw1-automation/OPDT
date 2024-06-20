@@ -17,6 +17,6 @@ jobs:
     - name: Build the Docker image
       run: |
         export TIMESTAMP=$(date +%s)
-        docker build . --file Dockerfile --tag pknw1/OPDT:${TIMESTAMP}
-        docker push pknw1/OPDT:${TIMESTAMP}
-        docker build . --file Dockerfile --tag pknw1/OPDT:latest
+        docker build . --file Dockerfile --tag pknw1/opdt:${TIMESTAMP}
+        docker push pknw1/opdt:${TIMESTAMP}
+        docker build . --file Dockerfile --tag pknw1/opdt:latest
