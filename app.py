@@ -4,12 +4,16 @@ import configparser
 from urllib.parse import urlparse
 
 app = Flask(__name__,
-	static_url_path='/static', 
-	static_folder='web/static',
-	template_folder='web/templates')
+        static_url_path='/static',
+        static_folder='web/static',
+        template_folder='web/templates')
 
 config = configparser.ConfigParser()
 config.read('config.ini')
+
+
+
+urls = [ 'www.pknw1.co.uk', 'www.pknw1.co.uk','www.pknw1.co.uk','www.pknw1.co.uk','www.pknw1.co.uk']
 
 def encoded_image(url):
   data = open(url, 'rb').read()
@@ -29,11 +33,19 @@ def config_categories():
   return render_template('index.html', base_url=request.base_url, product=product, logo=logo, categories=categories, applist=applist)
 
 
+
 @app.route("/home")
 def home():
     parsed = urlparse(request.base_url)
     base_url='http://'+str(parsed.netloc)+'/'
     return render_template('home.html', base_url=base_url)
+
+
+@app.route("/frame")
+def frame():
+    parsed = urlparse(request.base_url)
+    base_url='http://'+str(parsed.netloc)+'/'
+    return render_template('frame.html', urls=urls, base_url=base_url)
 
 @app.route("/info/<app>")
 def info(app=None):
@@ -45,3 +57,4 @@ def info(app=None):
 
 if __name__ == "__main__":
     app.run(debug=True)
+
