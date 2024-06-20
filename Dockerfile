@@ -2,8 +2,8 @@ FROM python:3.11-slim
 
 LABEL Name=OPDT Version=1.0
 
-WORKDIR /app
-ADD . /app
+WORKDIR /
+ADD . /
 
 RUN python3 -m pip install --upgrade pip
 RUN python3 -m pip install -r requirements.txt
