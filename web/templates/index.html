@@ -28,8 +28,17 @@
             <tr><td><span title="{{ app['summary'] }}">{{ app['name'] }}</span></td>
                 <td>&nbsp;</td>
       		<td> <a href="{{ app['link'] }}" onclick="return popitup(this)" title="Open the tool site in a new window"><button type="button">Launch</button></a> </td> 
-      		<td> <a href="{{ base_url }}info/{{ app['info'] }}" target="info" title="Information about the tool function"><button type="button" >Info</button> </td>
-      		<td> <a href="https://duckduckgo.com/{{ app['search'] }}" onclick="return popitup(this)" title="search DDG for similar tools"><button type="button" >Search</button> </td>
+		<td>
+		{% if app['info'] != '' %}
+      		<a href="{{ base_url }}info/{{ app['info'] }}" target="info" title="Information about the tool function"><button type="button" >Info</button> </td>
+		</td>
+		{% endif %}
+		</td>
+      		<td> {% if app['search'] != '' %}
+
+			<a href="https://duckduckgo.com/{{ app['search'] }}" onclick="return popitup(this)" title="search DDG for similar tools"><button type="button" >Search</button> 
+		{% endif %}
+		</td>
 		</tr>
           {% endif %}
         {% endfor %}
@@ -52,7 +61,7 @@
 
   </div>
   <div class="content" >
-    <iframe name="info" frameborder='0' noresize='noresize' style='position: absolute; background: transparent; width: 100%; height:100%;' src="{{ base_url }}frame" frameborder="0"></iframe>
+    <iframe name="info" frameborder='0' style="width:100%; height:900px" noresize='noresize' src="{{ base_url }}frame" frameborder="0"></iframe>
 
   </div>
 </div>

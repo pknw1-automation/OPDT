@@ -1,5 +1,5 @@
 body {
-background-color: black;
+background-color: #232323;
 font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
 color: white
 }
@@ -25,6 +25,8 @@ table.tdfont td {
 
 .content {
   float: left;
+  width: 1200px;
+  height: 900px;
 }
 
 .logo {

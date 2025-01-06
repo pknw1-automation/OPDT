@@ -13,7 +13,9 @@ config.read('config.ini')
 
 
 
-urls = [ 'www.pknw1.co.uk', 'www.pknw1.co.uk','www.pknw1.co.uk','www.pknw1.co.uk','www.pknw1.co.uk']
+#urls = [ 'www.pknw1.co.uk', 'www.pknw1.co.uk','www.pknw1.co.uk','www.pknw1.co.uk','www.pknw1.co.uk']
+
+urls = [ 'www.pknw1.co.uk']
 
 def encoded_image(url):
   data = open(url, 'rb').read()
